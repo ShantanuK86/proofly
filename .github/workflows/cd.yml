@@ -1,0 +1,63 @@
+name: CD / Deploy & Container Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-containers:
+    name: Build & Push Images to GHCR
+    runs-on: ubuntu-latest
+    if: github.repository_owner != ''
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Downcase Repo Owner for Tagging
+        id: repo_owner
+        run: echo "OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+      - name: Build & Push Proofly API
+        uses: docker/build-push-action@v5
+        with:
+          context: apps/api
+          file: apps/api/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ steps.repo_owner.outputs.OWNER_LOWER }}/proofly-api:latest
+            ghcr.io/${{ steps.repo_owner.outputs.OWNER_LOWER }}/proofly-api:${{ github.sha }}
+
+      - name: Build & Push Proofly Web
+        uses: docker/build-push-action@v5
+        with:
+          context: apps/web
+          file: apps/web/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ steps.repo_owner.outputs.OWNER_LOWER }}/proofly-web:latest
+            ghcr.io/${{ steps.repo_owner.outputs.OWNER_LOWER }}/proofly-web:${{ github.sha }}
+
+  trigger-cloud-deploy:
+    name: Trigger Cloud Deployment (Optional Webhook)
+    needs: publish-containers
+    runs-on: ubuntu-latest
+    if: false # Enable when secret RENDER_DEPLOY_HOOK or RAILWAY_TOKEN is configured
+    steps:
+      - name: Trigger Webhook
+        run: |
+          echo "Automated webhook trigger step for hosting environments"

@@ -1,8 +1,32 @@
 # Proofly
 
-> **Collect trust. Display proof. Win customers.**
+<div align="center">
 
-Proofly is a lightweight multi-tenant SaaS where businesses, agencies, coaches, and freelancers collect authentic customer testimonials through a shareable link, moderate incoming feedback, and display approved reviews on their websites using customizable, zero-conflict embeddable widgets.
+![CI Status](https://github.com/ShantanuK86/proofly/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.12%2B-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688?logo=fastapi)
+![Next.js](https://img.shields.io/badge/Next.js-14%2B-black?logo=next.js)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)
+
+**Collect trust. Display proof. Win customers.**
+
+*A lightweight multi-tenant SaaS where businesses collect authentic customer testimonials through a shareable link, approve submissions, and display them on websites using a customizable, zero-conflict widget.*
+
+[Explore Live Demo](http://localhost:3000/demo) · [API Documentation](http://localhost:8000/docs) · [System Design](docs/DESIGN.md)
+
+</div>
+
+---
+
+## 🚀 One-Click Cloud Deployment
+
+Deploy your own instance of Proofly with pre-configured PostgreSQL, FastAPI, and Next.js:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FShantanuK86%2Fproofly&root-directory=apps/web)
 
 ---
 
@@ -65,7 +89,8 @@ docker compose up --build
 ```bash
 # Set up virtual environment and install dependencies
 source .venv/bin/activate
-uv pip install -e apps/api
+pip install hatchling
+pip install -e apps/api
 
 # Run tests
 pytest apps/api/app/tests -v
@@ -104,4 +129,4 @@ apps/api/app/tests/test_widgets_and_public.py .           [100%]
 ---
 
 ## 📄 License
-MIT
+This project is licensed under the [MIT License](LICENSE).
