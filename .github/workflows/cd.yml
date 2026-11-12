@@ -33,7 +33,7 @@ jobs:
         run: echo "OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Build & Push Proofly API
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: apps/api
           file: apps/api/Dockerfile
@@ -43,7 +43,7 @@ jobs:
             ghcr.io/${{ steps.repo_owner.outputs.OWNER_LOWER }}/proofly-api:${{ github.sha }}
 
       - name: Build & Push Proofly Web
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: apps/web
           file: apps/web/Dockerfile
