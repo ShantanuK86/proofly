@@ -56,3 +56,4 @@ Please be respectful, constructive, and collaborative in all project discussions
    .venv/bin/pytest apps/api/app/tests
    cd apps/web && npm run build
    ```
+

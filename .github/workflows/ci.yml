@@ -108,3 +108,4 @@ jobs:
           file: apps/web/Dockerfile
           push: false
           tags: proofly-web:test
+

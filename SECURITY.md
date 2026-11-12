@@ -18,3 +18,4 @@ Please include:
 3. Potential impact and tenant isolation boundaries affected.
 
 We will acknowledge receipt within 48 hours and work on a fix promptly.
+

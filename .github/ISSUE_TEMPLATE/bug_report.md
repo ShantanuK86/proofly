@@ -26,3 +26,4 @@ If applicable, add screenshots or backend logs to help explain your problem.
  - OS: [e.g. macOS, Ubuntu, Windows]
  - Browser [e.g. Chrome, Safari, Firefox]
  - Version [e.g. v1.0.0]
+

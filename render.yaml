@@ -36,3 +36,4 @@ services:
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: https://proofly-api.onrender.com/api/v1
+
